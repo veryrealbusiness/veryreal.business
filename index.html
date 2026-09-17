@@ -70,7 +70,13 @@
   .currency { font-size: 1rem; color: #6b7280; }
   .tax-note { font-size: 0.875rem; color: #6b7280; margin: 0.5rem 0 0 0; }
   .order-summary { margin-bottom: 2rem; color: #4b5563; line-height: 1.5; }
-  .cart-actions { margin-bottom: 1.5rem; }
+  .cart-actions { 
+    margin-bottom: 1.5rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
   .trust-indicators { color: #6b7280; font-size: 0.875rem; }
   
   /* Contact Form Styles */
@@ -130,6 +136,40 @@
     padding-top: 1rem;
     border-top: 1px solid #374151;
   }
+  
+  /* PayPal Buy Now Button Styles */
+  .pp-674ENW9YCDPYA {
+    text-align: center;
+    border: none;
+    border-radius: 0.25rem;
+    min-width: 11.625rem;
+    padding: 0 2rem;
+    height: 2.625rem;
+    font-weight: bold;
+    background-color: #FFD140;
+    color: #000000;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+  }
+  
+  .divider {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0 1rem;
+  }
 </style>
 </head>
 <body>
@@ -142,9 +182,6 @@
     <a href="#checkout">Checkout</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="header-cart">
-    <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
-  </div>
 </header>
 
 <main class="main-content">
@@ -164,8 +201,17 @@
     </div>
 
     <div class="cart-actions">
-      <!-- PayPal View Cart / Checkout Button -->
-      <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+      <!-- PayPal Buy Now Button -->
+      <form action="https://www.paypal.com/ncp/payment/674ENW9YCDPYA" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem; width: 100%;">
+        <input class="pp-674ENW9YCDPYA" type="submit" value="Buy Now" />
+        <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+        <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+      </form>
+      
+      <div class="divider">Or Subscribe</div>
+
+      <!-- PayPal Subscription Button Container -->
+      <div id="paypal-button-container-P-18W347748A5866848NKWGB5Q" style="width: 100%; min-width: 11.625rem;"></div>
     </div>
     
     <div class="trust-indicators">
@@ -212,10 +258,29 @@
   </div>
 </footer>
 
+<!-- PayPal Subscription Scripts -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAjNuQ_9mavB-jMVK4IQ5RkAkl9jWsdCoE_gUiLQ5vYQY5BZFsoAlkW-f3hmob5TavIqZwsPKHl8exst8&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
 <script>
-  if (typeof cartPaypal !== 'undefined') {
-    cartPaypal.Cart({ id: "pp-view-cart" });
-  }
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-18W347748A5866848NKWGB5Q'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-18W347748A5866848NKWGB5Q'); // Renders the PayPal button
 </script>
+
+</body>
+</html>
 </body>
 </html>
