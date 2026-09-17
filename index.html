@@ -1,70 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VERYREAL.business</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VERYREAL.business - Secure Checkout</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .site-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand-name {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.025em;
+  }
+  .main-nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .main-nav a:hover {
+    color: #111;
+  }
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem;
+    gap: 4rem;
+  }
+  .product-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 2.5rem 2rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+  .card-header { margin-bottom: 1.5rem; }
+  .product-title { margin: 0 0 1rem 0; font-size: 1.5rem; }
+  .secure-badge {
+    background-color: #ecfdf5;
+    color: #065f46;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  .price-container { margin-bottom: 1.5rem; }
+  .price { font-size: 2.5rem; font-weight: 700; }
+  .currency { font-size: 1rem; color: #6b7280; }
+  .tax-note { font-size: 0.875rem; color: #6b7280; margin: 0.5rem 0 0 0; }
+  .order-summary { margin-bottom: 2rem; color: #4b5563; line-height: 1.5; }
+  .cart-actions { margin-bottom: 1.5rem; }
+  .trust-indicators { color: #6b7280; font-size: 0.875rem; }
   
-  <!-- PayPal Shopping Cart Script -->
-  <script src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="YMFMLZ2SJWH58"></script>
+  /* Contact Form Styles */
+  .contact-section {
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  .contact-section h2 { margin-top: 0; font-size: 1.25rem; }
+  .contact-section p { color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; text-align: left; }
+  .form-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  .submit-btn {
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .submit-btn:hover { background-color: #333; }
 
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      background-color: #f7f9fa;
-      color: #333;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .card {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      max-width: 480px;
-      width: 100%;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-    }
-    p {
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: #555;
-      margin-bottom: 2rem;
-    }
-    .cart-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
+  .site-footer {
+    background-color: #1f2937;
+    color: #d1d5db;
+    padding: 2rem;
+    font-size: 0.875rem;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .business-details a, .footer-links a { color: #d1d5db; text-decoration: none; }
+  .business-details a:hover, .footer-links a:hover { color: #fff; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
+  .copyright {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #374151;
+  }
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>VERYREAL.business</h1>
-    <p>Welcome to VERYREAL.business. View your cart below to complete your order.</p>
+<header class="site-header">
+  <div class="brand">
+    <span class="brand-name">VERYREAL.business</span>
+  </div>
+  <nav class="main-nav">
+    <a href="#checkout">Checkout</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="header-cart">
+    <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+  </div>
+</header>
 
-    <!-- PayPal View Cart Button -->
-    <div class="cart-container">
+<main class="main-content">
+  <div id="checkout" class="product-card">
+    <div class="card-header">
+      <h1 class="product-title">Gold Tier Shipping Estimate</h1>
+      <span class="badge secure-badge">🔒 Secure Transaction</span>
+    </div>
+    
+    <div class="price-container">
+      <div class="price">$1,320.00 <span class="currency">USD</span></div>
+      <p class="tax-note">Includes all applicable tracking and insurance fees.</p>
+    </div>
+
+    <div class="order-summary">
+      <p class="instruction">Please review your estimate. Proceed to our encrypted checkout to confirm your delivery details and finalize payment.</p>
+    </div>
+
+    <div class="cart-actions">
+      <!-- PayPal View Cart / Checkout Button -->
       <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+    </div>
+    
+    <div class="trust-indicators">
+      <p>Payment processed securely via PayPal. Buyer Protection applied.</p>
     </div>
   </div>
 
-  <!-- PayPal Cart Initialization -->
-  <script>
-    cartPaypal.Cart({ id: "pp-view-cart" });
-  </script>
+  <section id="contact" class="contact-section">
+    <h2>Contact Support</h2>
+    <p>Need assistance with your transaction? Send us a message.</p>
+    <form action="mailto:veryreal.email@veryreal.business" method="POST" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="Name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="Email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </section>
+</main>
 
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="business-details">
+      <strong>VERYREAL.business</strong><br>
+      123 Commerce Blvd, Suite 400<br>
+      Salt Lake City, UT 84101<br>
+      <a href="mailto:veryreal.email@veryreal.business">veryreal.email@veryreal.business</a> | 1-800-555-0199
+    </div>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; 2026 VERYREAL.business. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  if (typeof cartPaypal !== 'undefined') {
+    cartPaypal.Cart({ id: "pp-view-cart" });
+  }
+</script>
 </body>
 </html>
