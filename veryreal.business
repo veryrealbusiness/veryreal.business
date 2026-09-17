@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERYREAL.business</title>
+  
+  <!-- PayPal Shopping Cart Script -->
+  <script src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="YMFMLZ2SJWH58"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f7f9fa;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      max-width: 480px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .cart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>VERYREAL.business</h1>
+    <p>Welcome to VERYREAL.business. View your cart below to complete your order.</p>
+
+    <!-- PayPal View Cart Button -->
+    <div class="cart-container">
+      <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+    </div>
+  </div>
+
+  <!-- PayPal Cart Initialization -->
+  <script>
+    cartPaypal.Cart({ id: "pp-view-cart" });
+  </script>
+
+</body>
+</html>
