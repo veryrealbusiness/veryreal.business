@@ -45,32 +45,17 @@
     padding: 3rem 2rem;
     gap: 4rem;
   }
-  .products-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    width: 100%;
-    max-width: 1200px;
-  }
   .product-card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     padding: 2.5rem 2rem;
-    max-width: 450px;
+    max-width: 500px;
     width: 100%;
     text-align: center;
-    display: flex;
-    flex-direction: column;
   }
-  .card-header {
-    margin-bottom: 1.5rem;
-  }
-  .product-title {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-  }
+  .card-header { margin-bottom: 1.5rem; }
+  .product-title { margin: 0 0 1rem 0; font-size: 1.5rem; }
   .secure-badge {
     background-color: #ecfdf5;
     color: #065f46;
@@ -80,39 +65,20 @@
     font-weight: 500;
     display: inline-block;
   }
-  .price-container {
-    margin-bottom: 1.5rem;
-  }
-  .price {
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
-  .currency {
-    font-size: 1rem;
-    color: #6b7280;
-  }
-  .tax-note {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin: 0.5rem 0 0 0;
-  }
-  .order-summary {
-    margin-bottom: 2rem;
-    color: #4b5563;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-  .cart-actions {
-    margin-bottom: 1.5rem;
+  .price-container { margin-bottom: 1.5rem; }
+  .price { font-size: 2.5rem; font-weight: 700; }
+  .currency { font-size: 1rem; color: #6b7280; }
+  .tax-note { font-size: 0.875rem; color: #6b7280; margin: 0.5rem 0 0 0; }
+  .order-summary { margin-bottom: 2rem; color: #4b5563; line-height: 1.5; }
+  .cart-actions { 
+    margin-bottom: 1.5rem; 
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
   }
-  .trust-indicators {
-    color: #6b7280;
-    font-size: 0.875rem;
-  }
+  .trust-indicators { color: #6b7280; font-size: 0.875rem; }
+  
   /* Contact Form Styles */
   .contact-section {
     max-width: 500px;
@@ -122,25 +88,10 @@
     border-radius: 8px;
     border: 1px solid #e5e7eb;
   }
-  .contact-section h2 {
-    margin-top: 0;
-    font-size: 1.25rem;
-  }
-  .contact-section p {
-    color: #4b5563;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-  .form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-  }
-  .form-group label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-  }
+  .contact-section h2 { margin-top: 0; font-size: 1.25rem; }
+  .contact-section p { color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; text-align: left; }
+  .form-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
   .form-group input, .form-group textarea {
     width: 100%;
     padding: 0.5rem;
@@ -159,9 +110,8 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .submit-btn:hover {
-    background-color: #333;
-  }
+  .submit-btn:hover { background-color: #333; }
+
   .site-footer {
     background-color: #1f2937;
     color: #d1d5db;
@@ -176,19 +126,9 @@
     flex-wrap: wrap;
     gap: 2rem;
   }
-  .business-details a, .footer-links a {
-    color: #d1d5db;
-    text-decoration: none;
-  }
-  .business-details a:hover, .footer-links a:hover {
-    color: #fff;
-  }
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: right;
-  }
+  .business-details a, .footer-links a { color: #d1d5db; text-decoration: none; }
+  .business-details a:hover, .footer-links a:hover { color: #fff; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
   .copyright {
     width: 100%;
     text-align: center;
@@ -196,6 +136,7 @@
     padding-top: 1rem;
     border-top: 1px solid #374151;
   }
+  
   /* PayPal Buy Now Button Styles */
   .pp-674ENW9YCDPYA {
     text-align: center;
@@ -212,125 +153,120 @@
     line-height: 1.25rem;
     cursor: pointer;
   }
+  
+  .divider {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0 1rem;
+  }
 </style>
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="brand">
-      <span class="brand-name">VERYREAL.business</span>
-    </div>
-    <nav class="main-nav">
-      <a href="#checkout">Checkout</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header class="site-header">
+  <div class="brand">
+    <span class="brand-name">VERYREAL.business</span>
+  </div>
+  <nav class="main-nav">
+    <a href="#checkout">Checkout</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <main class="main-content">
+<main class="main-content">
+  <div id="checkout" class="product-card">
+    <div class="card-header">
+      <h1 class="product-title">Gold Tier Shipping Estimate</h1>
+      <span class="badge secure-badge">🔒 Secure Transaction</span>
+    </div>
     
-    <div id="checkout" class="products-wrapper">
-      
-      <!-- Subscription Card -->
-      <div class="product-card">
-        <div class="card-header">
-          <h1 class="product-title">Very Real Services<br>Subscription</h1>
-          <span class="badge secure-badge">🔒 Secure Transaction</span>
-        </div>
-        <div class="price-container">
-          <div class="price">$10.75 <span class="currency">USD</span></div>
-          <p class="tax-note">Billed periodically.</p>
-        </div>
-        <div class="order-summary">
-          <p class="instruction">Subscribe to Very Real Services. Proceed to our encrypted checkout to manage your recurring payment securely.</p>
-        </div>
-        <div class="cart-actions">
-          <!-- PayPal Subscription Button Container -->
-          <div id="paypal-button-container-P-18W347748A5866848NKWGB5Q" style="width: 100%; min-width: 11.625rem;"></div>
-        </div>
-        <div class="trust-indicators">
-          <p>Payment processed securely via PayPal. Buyer Protection applied.</p>
-        </div>
-      </div>
-
-      <!-- One-Time Purchase Card -->
-      <div class="product-card">
-        <div class="card-header">
-          <h1 class="product-title">Gold Tier Shipping Estimate</h1>
-          <span class="badge secure-badge">🔒 Secure Transaction</span>
-        </div>
-        <div class="price-container">
-          <div class="price">$1,320.00 <span class="currency">USD</span></div>
-          <p class="tax-note">Includes all applicable tracking and insurance fees.</p>
-        </div>
-        <div class="order-summary">
-          <p class="instruction">Please review your estimate. Proceed to our encrypted checkout to confirm your delivery details and finalize payment.</p>
-        </div>
-        <div class="cart-actions">
-          <!-- PayPal Buy Now Button -->
-          <form action="https://www.paypal.com/ncp/payment/674ENW9YCDPYA" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem; width: 100%;">
-            <input class="pp-674ENW9YCDPYA" type="submit" value="Buy Now" />
-            <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
-            <section style="font-size: 0.75rem;">
-              Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/>
-            </section>
-          </form>
-        </div>
-        <div class="trust-indicators">
-          <p>Payment processed securely via PayPal. Buyer Protection applied.</p>
-        </div>
-      </div>
-
+    <div class="price-container">
+      <div class="price">$1,320.00 <span class="currency">USD</span></div>
+      <p class="tax-note">Includes all applicable tracking and insurance fees.</p>
     </div>
 
-    <section id="contact" class="contact-section">
-      <h2>Contact Support</h2>
-      <p>Need assistance with your transaction? Send us a message.</p>
-      <form action="mailto:veryreal.email@veryreal.business" method="POST" enctype="text/plain">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="Name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="Email" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="Message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Send Message</button>
+    <div class="order-summary">
+      <p class="instruction">Please review your estimate. Proceed to our encrypted checkout to confirm your delivery details and finalize payment.</p>
+    </div>
+
+    <div class="cart-actions">
+      <!-- PayPal Buy Now Button -->
+      <form action="https://www.paypal.com/ncp/payment/674ENW9YCDPYA" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem; width: 100%;">
+        <input class="pp-674ENW9YCDPYA" type="submit" value="Buy Now" />
+        <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+        <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
       </form>
-    </section>
+      
+      <div class="divider">Or Subscribe</div>
 
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="business-details">
-        <strong>VERYREAL.business</strong><br>
-        123 Commerce Blvd, Suite 400<br>
-        Salt Lake City, UT 84101<br>
-        <a href="mailto:veryreal.email@veryreal.business">veryreal.email@veryreal.business</a> | 1-800-555-0199
-      </div>
-      <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
+      <!-- PayPal Subscription Button Container -->
+      <div id="paypal-button-container-P-18W347748A5866848NKWGB5Q" style="width: 100%; min-width: 11.625rem;"></div>
     </div>
-    <div class="copyright">
-      &copy; 2026 VERYREAL.business. All rights reserved.
+    
+    <div class="trust-indicators">
+      <p>Payment processed securely via PayPal. Buyer Protection applied.</p>
     </div>
-  </footer>
+  </div>
 
-  <!-- PayPal Subscription Scripts -->
-  <script src="https://www.paypal.com/sdk/js?client-id=BAAjNuQ_9mavB-jMVK4IQ5RkAkl9jWsdCoE_gUiLQ5vYQY5BZFsoAlkW-f3hmob5TavIqZwsPKHl8exst8&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
-  <script>
-    paypal.Buttons({
+  <section id="contact" class="contact-section">
+    <h2>Contact Support</h2>
+    <p>Need assistance with your transaction? Send us a message.</p>
+    <form action="mailto:veryreal.email@veryreal.business" method="POST" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="Name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="Email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="business-details">
+      <strong>VERYREAL.business</strong><br>
+      123 Commerce Blvd, Suite 400<br>
+      Salt Lake City, UT 84101<br>
+      <a href="mailto:veryreal.email@veryreal.business">veryreal.email@veryreal.business</a> | 1-800-555-0199
+    </div>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; 2026 VERYREAL.business. All rights reserved.
+  </div>
+</footer>
+
+<!-- PayPal Subscription Scripts -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAjNuQ_9mavB-jMVK4IQ5RkAkl9jWsdCoE_gUiLQ5vYQY5BZFsoAlkW-f3hmob5TavIqZwsPKHl8exst8&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
       style: {
-        shape: 'pill',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe'
+          shape: 'pill',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
       },
       createSubscription: function(data, actions) {
         return actions.subscription.create({
@@ -341,8 +277,10 @@
       onApprove: function(data, actions) {
         alert(data.subscriptionID); // You can add optional success message for the subscriber here
       }
-    }).render('#paypal-button-container-P-18W347748A5866848NKWGB5Q'); // Renders the PayPal button
-  </script>
+  }).render('#paypal-button-container-P-18W347748A5866848NKWGB5Q'); // Renders the PayPal button
+</script>
 
+</body>
+</html>
 </body>
 </html>
