@@ -3,29 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Very Real Services - Subscription</title>
+<title>Very Real Services - Store</title>
 <style>
   body {
     font-family: sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: #f9f9f9;
+    padding: 40px 20px;
   }
-  .subscription-card {
+  .logo {
+    max-width: 250px;
+    margin-bottom: 40px;
+  }
+  .products-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+  }
+  .product-card {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 30px;
-    max-width: 400px;
+    width: 320px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
   }
-  .logo {
-    max-width: 200px;
-    margin-bottom: 20px;
+  .product-card h2 {
+    margin-top: 0;
+    font-size: 1.4em;
+  }
+  .product-card small {
+    font-size: 0.7em;
+    color: #666;
+    font-weight: normal;
   }
   .price {
     font-size: 1.5em;
@@ -42,10 +61,15 @@
     text-align: center;
     margin-left: 10px;
   }
+  .paypal-container {
+    margin-top: auto;
+    padding-top: 20px;
+  }
   .contact-info {
-    margin-top: 25px;
+    margin-top: 50px;
     font-size: 0.9em;
     color: #666;
+    text-align: center;
   }
   .contact-info a {
     color: #0056b3;
@@ -55,44 +79,96 @@
 </head>
 <body>
 
-<div class="subscription-card">
+  <!-- Logo referenced verbatim -->
   <img src="image.jpg" alt="Very Real Business Logo" class="logo">
-  
-  <h2>Very Real Services</h2>
-  <p>Very Real Business</p>
-  
-  <div class="price">$10.75 / period</div>
 
-  <div class="quantity-selector">
-    <label for="quantity">Number of Subscriptions:</label>
-    <input type="number" id="quantity" name="quantity" min="1" value="1">
+  <div class="products-container">
+    <!-- Subscription Product -->
+    <div class="product-card">
+      <h2>Very Real Services<br><small>Subscription</small></h2>
+      <div class="price">$10.75 / period</div>
+      <div class="quantity-selector">
+        <label for="sub-quantity">Quantity:</label>
+        <input type="number" id="sub-quantity" name="sub-quantity" min="1" value="1">
+      </div>
+      <div id="paypal-button-container-sub" class="paypal-container"></div>
+    </div>
+
+    <!-- More Expensive Product -->
+    <div class="product-card">
+      <h2>Very Real Services<br><small>Premium Product</small></h2>
+      <!-- Update the price of your more expensive product below -->
+      <div class="price">$50.00</div> 
+      <div class="quantity-selector">
+        <label for="prem-quantity">Quantity:</label>
+        <input type="number" id="prem-quantity" name="prem-quantity" min="1" value="1">
+      </div>
+      <div id="paypal-button-container-premium" class="paypal-container"></div>
+    </div>
   </div>
-
-  <!-- PayPal Smart Button Container -->
-  <div id="paypal-button-container"></div>
 
   <div class="contact-info">
     Questions? Contact us at: <br>
     <a href="mailto:billing@veryreal.business">billing@veryreal.business</a>
   </div>
-</div>
 
-<!-- Replace 'YOUR_CLIENT_ID' with your PayPal App Client ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription"></script>
-<script>
-  paypal.Buttons({
-    createSubscription: function(data, actions) {
-      // Replace 'YOUR_PLAN_ID' with the Plan ID generated in your PayPal dashboard
-      return actions.subscription.create({
-        'plan_id': 'YOUR_PLAN_ID',
-        'quantity': document.getElementById('quantity').value
-      });
-    },
-    onApprove: function(data, actions) {
-      alert('Subscription successful!');
-    }
-  }).render('#paypal-button-container');
-</script>
+  <!-- Replace 'YOUR_CLIENT_ID' with your PayPal App Client ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription"></script>
+  <script>
+    // --- 1. Subscription Button Logic ---
+    paypal.Buttons({
+      createSubscription: function(data, actions) {
+        // Replace 'YOUR_SUB_PLAN_ID' with the $10.75 Plan ID from PayPal
+        return actions.subscription.create({
+          'plan_id': 'YOUR_SUB_PLAN_ID',
+          'quantity': document.getElementById('sub-quantity').value
+        });
+      },
+      onApprove: function(data, actions) {
+        alert('Subscription successful!');
+      }
+    }).render('#paypal-button-container-sub');
+
+    // --- 2. Premium Product Button Logic ---
+    paypal.Buttons({
+      // Assuming the premium product is a ONE-TIME purchase, use createOrder:
+      createOrder: function(data, actions) {
+        let qty = document.getElementById('prem-quantity').value;
+        let pricePerItem = 50.00; // Update this number to match your actual premium price
+        let total = (qty * pricePerItem).toFixed(2);
+
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: total
+            }
+          }]
+        });
+      },
+      
+      // NOTE: If your premium product is actually a SECOND SUBSCRIPTION instead of a one-time payment, 
+      // delete the 'createOrder' block above and uncomment the 'createSubscription' block below:
+      /*
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          'plan_id': 'YOUR_PREMIUM_PLAN_ID', // Replace with your Premium Plan ID
+          'quantity': document.getElementById('prem-quantity').value
+        });
+      },
+      */
+
+      onApprove: function(data, actions) {
+        // If it's a one-time order, capture the funds:
+        return actions.order.capture().then(function(details) {
+          alert('Premium purchase completed by ' + details.payer.name.given_name + '!');
+        });
+        
+        // If you switch it to a subscription, replace the above block with: 
+        // alert('Subscription successful!');
+      }
+    }).render('#paypal-button-container-premium');
+  </script>
 
 </body>
+</html>
 </html>
